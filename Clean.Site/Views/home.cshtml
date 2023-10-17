@@ -1,5 +1,5 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
-
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
 @using Clean.Core.Models.ViewModels
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
 
@@ -7,14 +7,30 @@
     Layout = "master.cshtml";
 }
 
-@await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
+@await Html.PartialAsync("~/Views/Partials/pageHeader.cshtml", new
+    PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
 
 @if (Model.ContentRows != null)
+
+
+
 {
     <article>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
+                    <h1>@Model.Name</h1>
+                    <h2>@Model.Title</h2>
+                    @if (Model.Names != null && Model.Names.Any())
+                    {
+                        <ul>
+                            @foreach (var name in Model.Names)
+                            {
+                                <li>@name</li>
+                            }
+                        </ul>
+                    }
+                    <img style="width: 100%;" src="@Model.Image.Url()" alt="Programming"/>
                     @Html.GetBlockListHtml(Model.ContentRows)
                 </div>
             </div>
