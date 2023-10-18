@@ -11,6 +11,7 @@
     PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
 
 @if (Model.ContentRows != null)
+
 {
     <article>
         <div class="container">
@@ -33,8 +34,12 @@
                         </ul>
                     }
                     @Model.BodyText
-                    @Model.Colour
-                    @Html.GetBlockListHtml(Model.ContentRows)
+                    // cambiar el color del texto on una lista desplegable en umbraco
+                    <style>
+                        body {
+                            color: @(Model.Colour)
+                        }
+                    <style/>@Html.GetBlockListHtml(Model.ContentRows)
                 </div>
             </div>
         </div>
