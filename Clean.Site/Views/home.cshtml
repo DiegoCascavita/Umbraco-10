@@ -11,9 +11,6 @@
     PageHeaderViewModel(Model.Name, Model.Title, Model.Subtitle, Model.MainImage))
 
 @if (Model.ContentRows != null)
-
-
-
 {
     <article>
         <div class="container">
@@ -21,6 +18,11 @@
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <h1>@Model.Name</h1>
                     <h2>@Model.Title</h2>
+                    @if (Model.HideImage != null && Model.HideImage == false)
+                    {
+                        <img style="width: 100%;" src="@Model.Image.Url()" alt="Programming" />
+                    }
+
                     @if (Model.Names != null && Model.Names.Any())
                     {
                         <ul>
@@ -30,7 +32,8 @@
                             }
                         </ul>
                     }
-                    <img style="width: 100%;" src="@Model.Image.Url()" alt="Programming"/>
+                    @Model.BodyText
+                    @Model.Colour
                     @Html.GetBlockListHtml(Model.ContentRows)
                 </div>
             </div>
